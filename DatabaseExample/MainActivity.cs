@@ -5,6 +5,7 @@ using Android.Support.V7.App;
 using Android.Widget;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace DatabaseExample
 {
@@ -39,14 +40,21 @@ namespace DatabaseExample
                 noteListView.Adapter = new CustomAdapter(this, notes.ToList());
             };
 
-            list.ItemClick += list_Click;
+            try
+            {
+                list.ItemClick += list_Click;
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         private void list_Click(object sender, AdapterView.ItemClickEventArgs e)
         {
             ChosenNote.Index = e.Position;
             var certainNote = new Intent(this, typeof(NoteActivity));
-            StartActivity(certainNote);
+            StartActivityForResult(certainNote, 0);
             //Resets the notes list to current after exiting activity, but i didn't know how to do it so i just threw it here
             var noteListView = FindViewById<ListView>(Resource.Id.listView1);
             var databaseService = new DatabaseService();

@@ -50,9 +50,13 @@ namespace DatabaseExample
             db.Delete(db.Table<Note>().ToList()[key]);
         }
 
-        public void EditContent(int key, string content)
+        public void EditContent(int key, string content, string title)
         {
-            //TODO
+            Note updatedNote = new Note();
+            updatedNote.Id = key;
+            updatedNote.Title = title;
+            updatedNote.Content = content;
+            db.Update(updatedNote);
         }
 
         public TableQuery<Note> GetAllNotes()

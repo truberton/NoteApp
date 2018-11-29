@@ -34,20 +34,14 @@ namespace DatabaseExample
             var edit = FindViewById<Button>(Resource.Id.button1);
             var delete = FindViewById<Button>(Resource.Id.button2);
 
-            //edit.Click += Edit_Click;
             edit.Click += delegate
             {
                 string content = FindViewById<EditText>(Resource.Id.editText1).Text;
                 FindViewById<TextView>(Resource.Id.textView2).Text = content;
-                databaseService.EditContent(noteIndex, content);
+                databaseService.EditContent(notes[noteIndex].Id, content, notes[noteIndex].Title);
             };
             delete.Click += Delete_Click;
         }
-
-        //private void Edit_Click(object sender, EventArgs e)
-        //{
-        //    FindViewById<TextView>(Resource.Id.textView2).Text = FindViewById<EditText>(Resource.Id.editText1).Text;
-        //}
 
         private void Delete_Click(object sender, EventArgs e)
         {
